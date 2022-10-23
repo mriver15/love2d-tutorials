@@ -2,41 +2,34 @@
 
 function love.load()
     -- Leave out format
-    require("example")
+    -- require("example")
 
-    x = 100
-    fps = 0
+    Object = require "classic"
+    require "shape"
+    require "rectangle"
+    require "circle"
 
-    rectangles = {}
-end
+    r1 = Rectangle(120,80,40,60)
+    r2 = Circle(100,100,50)
 
-function createRect()
-    rect = {} 
-    rect.x = 100
-    rect.y = 100
-    rect.width = 70
-    rect.height = 90
-    rect.speed = 100
-
-    table.insert(rectangles,rect)
+    myImage = love.graphics.newImage("sheep.png")
 end
 
 function love.keypressed(key)
-    if key=="space" then
-        createRect()
-    end
+    
 end
 
 function love.update(dt)
-    fps = love.timer.getFPS()
+    -- fps = love.timer.getFPS()
 
+    r1:update(dt)
+    r2:update(dt)
 end
 
 function love.draw()
-    love.graphics.printf("FPS : " .. tostring(fps),20,30,100)
-    
-    for i, rect in ipairs(rectangles) do
-        love.graphics.rectangle('line',rect.x,rect.y,rect.width,rect.height)
-    end
+    -- love.graphics.printf("FPS : " .. tostring(fps),20,30,100)
+    r1:draw()
+    r2:draw()
 
+    love.graphics.draw(myImage, 100, 100)
 end
